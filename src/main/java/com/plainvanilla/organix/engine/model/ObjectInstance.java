@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name="OBJECT_INSTANCE")
 public class ObjectInstance {
@@ -22,6 +24,9 @@ public class ObjectInstance {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="OBJECT_ID")
 	private Long id;	
+	
+	@Column(name="NAME", nullable=false)
+	private String name;
 	
 	@ManyToOne
 	@JoinColumn(name="TYPE_ID")
@@ -32,6 +37,17 @@ public class ObjectInstance {
 
 	@OneToMany(mappedBy="targetObject")	
 	protected List<Connection> outgoingConnections = new ArrayList<Connection>();
+
+	
+	public ObjectInstance() {
+		
+	}
+	
+	public ObjectInstance(String name, ObjectType type) {
+		super();
+		this.name = name;
+		this.type = type;
+	}
 
 	public List<Connection> getIncommingConnections() {
 		return Collections.unmodifiableList(incommingConnections);
@@ -67,6 +83,14 @@ public class ObjectInstance {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}	
 	
 	

@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.plainvanilla.organix.engine.model.exception.OrganixModelException;
+
 @Entity
 @Table(name="CONNECTION_TYPE")
 public final class ConnectionType {
@@ -55,20 +57,20 @@ public final class ConnectionType {
 	
 	public Connection createConnection(ObjectInstance sourceObject, ObjectInstance targetObject) {
 		
-		if (!sourceEnd.getObjectType().equals(sourceObject.getType())) {
-			throw new IllegalStateException();
+		if (!sourceEnd.getObjectType().equals(sourceObject.getType().getTypeNumber())) {
+			throw new OrganixModelException("Connection source end type does not match. Excpected type: " + sourceEnd.getObjectType() + ". Found type: " + sourceObject.getType().getTypeNumber());
 		}
 		
-		if (!targetEnd.getObjectType().equals(targetObject.getType())) {
-			throw new IllegalStateException();
+		if (!targetEnd.getObjectType().equals(targetObject.getType().getTypeNumber())) {
+			throw new OrganixModelException("Connection target end type does not match. Excpected type: " + targetEnd.getObjectType() + ". Found type: " + targetObject.getType().getTypeNumber());
 		}
 		
 		if (sourceEnd.getUnique() && containsThisConnectionType(sourceObject.getOutgoingConnections())) {
-			throw new IllegalStateException();
+			throw new OrganixModelException("Role '" + sourceEnd.getRoleName() + "' is set as unique. Connection is already set for " + sourceObject.getType().getName() + " '" + sourceObject.getName() + "'");
 		}
 	
 		if (targetEnd.getUnique() && containsThisConnectionType(targetObject.getIncommingConnections())) {
-			throw new IllegalStateException();
+			throw new OrganixModelException("Role '" + targetEnd.getRoleName() + "' is set as unique. Connection is already set for " + targetObject.getType().getName() + " '" + targetObject.getName() + "'");
 		}
 						
 		Connection c =  new Connection(sourceObject, targetObject, this);

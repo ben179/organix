@@ -38,6 +38,10 @@ public class ConnectionEndpoint {
 		this.mandatory = mandatory;
 	}
 
+	public String getRoleName() {
+		return roleName;
+	}
+
 	public Boolean getUnique() {
 		return unique;
 	}
