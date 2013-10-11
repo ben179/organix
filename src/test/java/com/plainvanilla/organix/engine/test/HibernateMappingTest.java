@@ -185,6 +185,19 @@ public class HibernateMappingTest {
 		Connection connection23 = ocManager_OperationCluster.createConnection(person3, operationCluster2);
 		Connection connection24 = ocManager_OperationCluster.createConnection(person4, operationCluster3);
 		
+		Connection connection25 = businessCoordinator_itProduct.createConnection(itSystem1, person4);
+		Connection connection26 = businessCoordinator_itProduct.createConnection(itSystem2, person2);
+		Connection connection27 = businessCoordinator_itProduct.createConnection(itSystem3, person2);
+		Connection connection28 = businessCoordinator_itProduct.createConnection(itSystem4, person1);
+		Connection connection29 = businessCoordinator_itProduct.createConnection(itSystem5, person4);
+		
+		Connection connection30 = pdtManagerDeputy_PDTeam.createConnection(person5, pdTeam1);
+		Connection connection31 = pdtManagerDeputy_PDTeam.createConnection(person4, pdTeam1);
+		Connection connection32 = pcManagerDeputy_ProductCluster.createConnection(person1, productCluster1);
+		Connection connection33 = pcManagerDeputy_ProductCluster.createConnection(person2, productCluster1);		
+		Connection connection34 = ocManagerDeputy_OperationCluster.createConnection(person3, operationCluster3);
+		Connection connection35 = ocManagerDeputy_OperationCluster.createConnection(person4, operationCluster3);
+		
 		session.save(connection1);
 		session.save(connection2);
 		session.save(connection3);
@@ -214,9 +227,20 @@ public class HibernateMappingTest {
 		session.save(connection22);
 		session.save(connection23);
 		session.save(connection24);	
+	
+		session.save(connection25);
+		session.save(connection26);
+		session.save(connection27);
+		session.save(connection28);
+		session.save(connection29);
+
+		session.save(connection30);
+		session.save(connection31);
+		session.save(connection32);
+		session.save(connection33);
+		session.save(connection34);
+		session.save(connection35);	
 		
 	}
-	
-	
 	
 }
