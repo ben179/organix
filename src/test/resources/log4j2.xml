@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n" />
+		</Console>
+		<File name="TestLog" fileName="test.log">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n" />
+		</File>
+	</Appenders>
+	<Loggers>
+		<logger name="org.hibernate.SQL.*" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="TestLog" />
+		</logger>
+		<logger name="org.hibernate.type.*" level="TRACE" additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="TestLog" />
+		</logger>
+		<Root level="ERROR">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="TestLog" />
+		</Root>
+	</Loggers>
+</Configuration>
