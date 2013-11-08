@@ -37,7 +37,7 @@ public class TestUtils {
         cfg.addAnnotatedClass(ObjectInstance.class);
 
         cfg.setProperty("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver").
-                setProperty("hibernate.connection.url", "jdbc:hsqldb:mem:daydreamersdb10").
+                setProperty("hibernate.connection.url", "jdbc:hsqldb:mem:organixTestDb").
                 setProperty("hibernate.connection.username", "sa").
                 setProperty("hibernate.connection.password", "").
                 setProperty("hibernate.hbm2ddl.auto", "create-drop").

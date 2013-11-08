@@ -39,5 +39,6 @@
 	<classpathentry kind="var" path="M2_REPO/hsqldb/hsqldb/1.8.0.7/hsqldb-1.8.0.7.jar"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.7/junit-4.7.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/apps/maven3/local_repository/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
