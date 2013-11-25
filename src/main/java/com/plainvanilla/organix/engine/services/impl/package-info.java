@@ -1,7 +1,6 @@
 /**
+ * Implementation of service interfaces
  * 
- */
-/**
  * @author Martin Bencik
  *
  */

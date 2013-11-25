@@ -1,7 +1,6 @@
 /**
+ * Root package of model component for Organix
  * 
- */
-/**
  * @author Martin Bencik
  *
  */

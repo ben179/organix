@@ -2,9 +2,10 @@ package com.plainvanilla.organix.engine.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.plainvanilla.organix.engine.model.ConnectionType;
 import com.plainvanilla.organix.engine.model.ObjectType;
-
 
 public interface DatabaseConfigurationService {
 

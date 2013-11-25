@@ -1,7 +1,6 @@
 /**
+ * DAO Interfaces definitions 
  * 
- */
-/**
  * @author Martin Bencik
  *
  */

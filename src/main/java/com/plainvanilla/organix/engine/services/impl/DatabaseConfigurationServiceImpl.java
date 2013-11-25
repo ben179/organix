@@ -68,7 +68,7 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 
 	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 	public List<ConnectionType> getConnectionTypeByName(String name) {
-		return connectionTypeDao.findByName(name);
+		return connectionTypeDao.findByName(name.toLowerCase());
 	}
 
 	@Autowired

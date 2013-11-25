@@ -58,7 +58,7 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
 	
 	@SuppressWarnings("unchecked")
 	public List<T> findByExample(T exampleInstance, String... excludeProperty) {
-		Example example = Example.create(exampleInstance).ignoreCase().excludeNone().enableLike(MatchMode.ANYWHERE);
+		Example example = Example.create(exampleInstance).ignoreCase().enableLike(MatchMode.ANYWHERE);
 		
 		for (String property : excludeProperty) {
 			example.excludeProperty(property);

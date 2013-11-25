@@ -1,7 +1,6 @@
 /**
+ * Model-specific exceptions
  * 
- */
-/**
  * @author Martin Bencik
  *
  */
