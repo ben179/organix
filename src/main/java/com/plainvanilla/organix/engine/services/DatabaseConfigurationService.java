@@ -1,8 +1,7 @@
 package com.plainvanilla.organix.engine.services;
 
 import java.util.List;
-
-import org.springframework.stereotype.Service;
+import java.util.Map;
 
 import com.plainvanilla.organix.engine.model.ConnectionType;
 import com.plainvanilla.organix.engine.model.ObjectType;
@@ -17,5 +16,8 @@ public interface DatabaseConfigurationService {
 	
 	ConnectionType getConnectionType(Integer id);
 	List<ConnectionType> getConnectionTypeByName(String name);
+	
+	Map<Integer, ConnectionType> getConnectionTypes();
+	Map<Integer, ObjectType> getObjectTypes();
 		
 }

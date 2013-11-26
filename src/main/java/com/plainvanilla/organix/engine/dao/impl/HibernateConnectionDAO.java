@@ -1,5 +1,8 @@
 package com.plainvanilla.organix.engine.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,7 +16,22 @@ public class HibernateConnectionDAO extends AbstractHibernateDAO<Connection, Lon
 	@Autowired
 	public HibernateConnectionDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
-		// TODO Auto-generated constructor stub
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Connection> getConnectionByTypeId(Integer typeId) {
+		
+		Query q = getCurrentSession().getNamedQuery("findConnectionByTypeId");
+		q.setParameter("typeId", typeId);		
+		return q.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Connection> getConnectionByTypeName(String typeName) {
+		
+		Query q = getCurrentSession().getNamedQuery("findConnectionByTypeName");
+		q.setParameter("typeName", "%" + typeName + "%");
+		return q.list();
 	}
 
 }

@@ -41,8 +41,9 @@ public class HibernateConnectionTypeDAO extends AbstractHibernateDAO<ConnectionT
 		return types.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<ConnectionType> findByName(String name) {
-		Query q = super.getCurrentSession().createQuery("from ConnectionType c where lower(c.sourceEnd.roleName) like :role or lower(c.targetEnd.roleName) like :role");
+		Query q = super.getCurrentSession().getNamedQuery("findConnectionTypeByName");
 		q.setParameter("role", "%" + name + "%");
 		return q.list();
 	}

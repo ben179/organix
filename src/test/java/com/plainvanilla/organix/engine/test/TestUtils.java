@@ -17,13 +17,7 @@ import com.plainvanilla.organix.engine.model.ConnectionType;
 import com.plainvanilla.organix.engine.model.ObjectInstance;
 import com.plainvanilla.organix.engine.model.ObjectType;
 
-/**
- * Created with IntelliJ IDEA.
- * User: ga2begs
- * Date: 25/09/13
- * Time: 13:40
- * To change this template use File | Settings | File Templates.
- */
+
 public class TestUtils {
 
     public static Configuration getConfiguration() {

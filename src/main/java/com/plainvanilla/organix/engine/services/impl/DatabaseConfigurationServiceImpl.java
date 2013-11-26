@@ -1,6 +1,8 @@
 package com.plainvanilla.organix.engine.services.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,6 +73,32 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 		return connectionTypeDao.findByName(name.toLowerCase());
 	}
 
+	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)	
+	public Map<Integer, ConnectionType> getConnectionTypes() {
+		
+		List<ConnectionType> types = connectionTypeDao.findAll();		
+		Map<Integer, ConnectionType> typeMap = new HashMap<Integer, ConnectionType>();
+		
+		for (ConnectionType type : types) {
+			typeMap.put(type.getTypeNumber(), type);
+		}
+		
+		return typeMap;
+	}
+	
+	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	public Map<Integer, ObjectType> getObjectTypes() {
+		
+		List<ObjectType> types = objectTypeDao.findAll();		
+		Map<Integer, ObjectType> typeMap = new HashMap<Integer, ObjectType>();
+		
+		for (ObjectType type : types) {
+			typeMap.put(type.getTypeNumber(), type);
+		}
+		
+		return typeMap;
+	}
+	
 	@Autowired
 	public void setConnectionTypeDao(ConnectionTypeDAO connectionTypeDao) {
 		this.connectionTypeDao = connectionTypeDao;

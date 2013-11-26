@@ -2,6 +2,7 @@ package com.plainvanilla.organix.engine.test.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static com.plainvanilla.organix.engine.test.integration.TestConstants.*;
 
 import java.util.List;
 
@@ -23,19 +24,7 @@ import com.plainvanilla.organix.engine.services.DatabaseConfigurationService;
 @TransactionConfiguration(defaultRollback=false)
 public class DatabaseConfigurationServiceIntegrationTest {
 	
-	private static final int PERSON_TYPE_ID = 1;
-	private static final int PC_TYPE_ID = 9;
-	private static final int OC_TYPE_ID = 8;
-	private static final int PD_TEAM_TYPE_ID = 7;
-	private static final int IT_SYSTEM_TYPE_ID = 6;
-	
-	private static final String PERSON = "Person";
-	private static final String PRODUCT_CLUSTER = "Product Cluster";
-	private static final String OPERATION_CLUSTER = "Operation Cluster";
-	private static final String PRODUCT_DELIVERY_TEAM = "Product Delivery Team";
-	private static final String IT_SYSTEM = "IT-System";
-	
-	
+
 	@Autowired
 	private DatabaseConfigurationService service;
 
@@ -82,16 +71,16 @@ public class DatabaseConfigurationServiceIntegrationTest {
 		assertEquals(operationCluster.getName(), OPERATION_CLUSTER);
 		assertEquals(pdTeam.getName(), PRODUCT_DELIVERY_TEAM);
 		
-		service.addConnectionType(220, "Belongs to Product Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", productCluster.getTypeNumber(), false, false);
-		service.addConnectionType(221, "Belongs to Operation Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", operationCluster.getTypeNumber(), false, false);
-		service.addConnectionType(222, "Belongs to PD Team", itSystem.getTypeNumber(), true, false, "Contains IT-Product", pdTeam.getTypeNumber(), false, false);
-		service.addConnectionType(223, "Manages Product Cluster", person.getTypeNumber(), false, false, "Is Managed By", productCluster.getTypeNumber(), true, true);		
-		service.addConnectionType(224, "Is PCMD", person.getTypeNumber(), false, false, "Has PCDM", productCluster.getTypeNumber(), false, false);		
-		service.addConnectionType(225, "Manages Operation Cluster", person.getTypeNumber(), false, false, "Is Managed By", operationCluster.getTypeNumber(), true, true);		
-		service.addConnectionType(226, "Is OCMD", person.getTypeNumber(), false, false, "Has OCDM", operationCluster.getTypeNumber(), false, false);		
-		service.addConnectionType(227, "Manages PD Team", person.getTypeNumber(), false, false, "Is Managed By", pdTeam.getTypeNumber(), true, true);		
-		service.addConnectionType(228, "Is PDMD", person.getTypeNumber(), false, false, "Has PDMD", pdTeam.getTypeNumber(), false, false);		
-		service.addConnectionType(229, "Has Business Coordinator", itSystem.getTypeNumber(), true, true, "Is Business Coordinator of", person.getTypeNumber(), false, false);
+		service.addConnectionType(BELONGS_TO_PRODUCT_CLUSTER_CTYPE, "Belongs to Product Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", productCluster.getTypeNumber(), false, false);
+		service.addConnectionType(BELONGS_TO_OPERATION_CLUSTER_CTYPE, "Belongs to Operation Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", operationCluster.getTypeNumber(), false, false);
+		service.addConnectionType(PELONGS_TO_PD_TEAM_CTYPE, "Belongs to PD Team", itSystem.getTypeNumber(), true, false, "Contains IT-Product", pdTeam.getTypeNumber(), false, false);
+		service.addConnectionType(MANAGES_PRODUCT_CLUSTER_CTYPE, "Manages Product Cluster", person.getTypeNumber(), false, false, "Is Managed By", productCluster.getTypeNumber(), true, true);		
+		service.addConnectionType(IS_PCMD_CTYPE, "Is PCMD", person.getTypeNumber(), false, false, "Has PCDM", productCluster.getTypeNumber(), false, false);		
+		service.addConnectionType(MANAGES_OPERATION_CLUSTER_CTYPE, "Manages Operation Cluster", person.getTypeNumber(), false, false, "Is Managed By", operationCluster.getTypeNumber(), true, true);		
+		service.addConnectionType(IS_OCMD_CTYPE, "Is OCMD", person.getTypeNumber(), false, false, "Has OCDM", operationCluster.getTypeNumber(), false, false);		
+		service.addConnectionType(MANAGES_PD_TEAM_CTYPE, "Manages PD Team", person.getTypeNumber(), false, false, "Is Managed By", pdTeam.getTypeNumber(), true, true);		
+		service.addConnectionType(IS_PDMD_CTYPE, "Is PDMD", person.getTypeNumber(), false, false, "Has PDMD", pdTeam.getTypeNumber(), false, false);		
+		service.addConnectionType(HAS_BUSINESS_COORDINATOR_CTYPE, "Has Business Coordinator", itSystem.getTypeNumber(), true, true, "Is Business Coordinator of", person.getTypeNumber(), false, false);
 	
 	}
 	

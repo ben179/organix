@@ -30,6 +30,10 @@ public final class Connection {
 	@JoinColumn(name="TYPE_ID", nullable=false)
 	private ConnectionType type;
 
+	private Connection() {
+		
+	}
+	
 	public Connection(ObjectInstance source, ObjectInstance target, ConnectionType type) {
 		
 		this.sourceObject = source;

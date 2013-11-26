@@ -10,19 +10,20 @@ import com.plainvanilla.organix.engine.model.ObjectType;
 public interface DatabaseService {
 
 	ObjectInstance addObjectInstance(ObjectType type, String name);
+	ObjectInstance addObjectInstance(Integer typeId, String name);
+	
 	Connection addConnection(ConnectionType type, ObjectInstance source, ObjectInstance target);
+	Connection addConnection(Integer typeId, ObjectInstance source, ObjectInstance target);
+	
 	void removeConnection(Connection connection);
 	void removeObjectInstance(ObjectInstance instance);
 		
-	List<ObjectInstance> findObjectsByType(Integer typeId);
+	List<ObjectInstance> findObjectsByTypeId(Integer typeId);
+	List<ObjectInstance> findObjectsByTypeName(String typeName);
+	List<ObjectInstance> findObjectsByTypeIdAndName(Integer typeId, String name);
 	List<ObjectInstance> findObjectsByName(String name);
-	List<Connection> getAllConnectionsForObject(ObjectInstance instance);
-	List<Connection> getAllIncommingConnections(ObjectInstance instance);
-	List<Connection> getAllOutgoingConnections(ObjectInstance instance);
-		
-	List<Connection> getConnectionsByType(Integer typeId);
-	List<Connection> getConnectionsByName(String name);	
 	
-	
+	List<Connection> findConnectionsByTypeId(Integer typeId);
+	List<Connection> findConnectionsByTypeName(String name);	
 	
 }
