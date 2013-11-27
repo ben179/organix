@@ -73,7 +73,7 @@ public class DatabaseConfigurationServiceIntegrationTest {
 		
 		service.addConnectionType(BELONGS_TO_PRODUCT_CLUSTER_CTYPE, "Belongs to Product Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", productCluster.getTypeNumber(), false, false);
 		service.addConnectionType(BELONGS_TO_OPERATION_CLUSTER_CTYPE, "Belongs to Operation Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", operationCluster.getTypeNumber(), false, false);
-		service.addConnectionType(PELONGS_TO_PD_TEAM_CTYPE, "Belongs to PD Team", itSystem.getTypeNumber(), true, false, "Contains IT-Product", pdTeam.getTypeNumber(), false, false);
+		service.addConnectionType(BELONGS_TO_PD_TEAM_CTYPE, "Belongs to PD Team", itSystem.getTypeNumber(), true, false, "Contains IT-Product", pdTeam.getTypeNumber(), false, false);
 		service.addConnectionType(MANAGES_PRODUCT_CLUSTER_CTYPE, "Manages Product Cluster", person.getTypeNumber(), false, false, "Is Managed By", productCluster.getTypeNumber(), true, true);		
 		service.addConnectionType(IS_PCMD_CTYPE, "Is PCMD", person.getTypeNumber(), false, false, "Has PCDM", productCluster.getTypeNumber(), false, false);		
 		service.addConnectionType(MANAGES_OPERATION_CLUSTER_CTYPE, "Manages Operation Cluster", person.getTypeNumber(), false, false, "Is Managed By", operationCluster.getTypeNumber(), true, true);		

@@ -96,11 +96,11 @@ public class DatabaseServiceIntegrationTest {
 		assertNotNull(service.addConnection(BELONGS_TO_OPERATION_CLUSTER_CTYPE, itSystem4, operationCluster3));
 		assertNotNull(service.addConnection(BELONGS_TO_OPERATION_CLUSTER_CTYPE, itSystem5, operationCluster1));
 
-		assertNotNull(service.addConnection(PELONGS_TO_PD_TEAM_CTYPE, itSystem1, pdTeam1));
-		assertNotNull(service.addConnection(PELONGS_TO_PD_TEAM_CTYPE, itSystem2, pdTeam3));
-		assertNotNull(service.addConnection(PELONGS_TO_PD_TEAM_CTYPE, itSystem3, pdTeam2));
-		assertNotNull(service.addConnection(PELONGS_TO_PD_TEAM_CTYPE, itSystem4, pdTeam3));
-		assertNotNull(service.addConnection(PELONGS_TO_PD_TEAM_CTYPE, itSystem5, pdTeam1));
+		assertNotNull(service.addConnection(BELONGS_TO_PD_TEAM_CTYPE, itSystem1, pdTeam1));
+		assertNotNull(service.addConnection(BELONGS_TO_PD_TEAM_CTYPE, itSystem2, pdTeam3));
+		assertNotNull(service.addConnection(BELONGS_TO_PD_TEAM_CTYPE, itSystem3, pdTeam2));
+		assertNotNull(service.addConnection(BELONGS_TO_PD_TEAM_CTYPE, itSystem4, pdTeam3));
+		assertNotNull(service.addConnection(BELONGS_TO_PD_TEAM_CTYPE, itSystem5, pdTeam1));
 
 		assertNotNull(service.addConnection(MANAGES_PD_TEAM_CTYPE, person1, pdTeam1));
 		assertNotNull(service.addConnection(MANAGES_PD_TEAM_CTYPE, person2, pdTeam2));
