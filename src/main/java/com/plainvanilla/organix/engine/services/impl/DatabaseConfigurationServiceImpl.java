@@ -17,7 +17,7 @@ import com.plainvanilla.organix.engine.model.exception.OrganixIllegalConfigurati
 import com.plainvanilla.organix.engine.services.DatabaseConfigurationService;
 
 
-@Service
+@Service("databaseConfigurationService")
 public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationService {
 	
 	private ConnectionTypeDAO connectionTypeDao;

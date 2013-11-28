@@ -17,7 +17,7 @@ import com.plainvanilla.organix.engine.model.exception.OrganixIllegalConfigurati
 import com.plainvanilla.organix.engine.services.DatabaseConfigurationService;
 import com.plainvanilla.organix.engine.services.DatabaseService;
 
-@Service
+@Service("databaseService")
 public class DatabaseServiceImpl implements DatabaseService {
 
 	
