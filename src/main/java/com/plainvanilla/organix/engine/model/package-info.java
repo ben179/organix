@@ -1,7 +1,7 @@
 /**
  * Root package of model components for Organix
  * 
- * @author Martin Bencik
+ * @author ben179
  *
  */
 

@@ -1,7 +1,7 @@
 /**
  * Model-specific exceptions
  * 
- * @author Martin Bencik
+ * @author ben179
  *
  */
 package com.plainvanilla.organix.engine.model.exception;

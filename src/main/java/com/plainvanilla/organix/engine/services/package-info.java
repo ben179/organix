@@ -1,7 +1,7 @@
 /**
  * Definition of service interfaces
  * 
- * @author Martin Bencik
+ * @author ben179
  *
  */
 package com.plainvanilla.organix.engine.services;

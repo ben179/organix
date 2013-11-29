@@ -1,7 +1,7 @@
 /**
  * Hibernate implementation of DAO interfaces
  * 
- * @author Martin Bencik
+ * @author ben179
  *
  */
 
