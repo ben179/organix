@@ -120,5 +120,37 @@ public class DatabaseServiceImpl implements DatabaseService {
 	public List<ObjectInstance> findObjectsByName(String name) {
 		return objectInstanceDao.getObjectInstanceByName(name.toLowerCase());
 	}
+
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public List<ObjectInstance> getObjectInstances() {
+		return objectInstanceDao.findAll();
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public List<Connection> getConnectionInstances() {
+		return connectionDao.findAll();
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+	public void removeConnectionById(Long id) {
+		Connection c = connectionDao.findById(id, true);
+		
+		if (c == null) {
+			throw new IllegalStateException();
+		}
+		
+		connectionDao.makeTransient(c);		
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+	public void removeObjectInstanceById(Long id) {
+		ObjectInstance instance = objectInstanceDao.findById(id, true);
+		
+		if (instance == null) {
+			throw new IllegalStateException();
+		}
+		
+		objectInstanceDao.makeTransient(instance);
+	}
 	
 }

@@ -16,13 +16,17 @@ public interface DatabaseService {
 	Connection addConnection(Integer typeId, ObjectInstance source, ObjectInstance target);
 	
 	void removeConnection(Connection connection);
+	void removeConnectionById(Long id);
 	void removeObjectInstance(ObjectInstance instance);
-		
+	void removeObjectInstanceById(Long id);	
+	
+	List<ObjectInstance> getObjectInstances();
 	List<ObjectInstance> findObjectsByTypeId(Integer typeId);
 	List<ObjectInstance> findObjectsByTypeName(String typeName);
 	List<ObjectInstance> findObjectsByTypeIdAndName(Integer typeId, String name);
 	List<ObjectInstance> findObjectsByName(String name);
 	
+	List<Connection> getConnectionInstances();
 	List<Connection> findConnectionsByTypeId(Integer typeId);
 	List<Connection> findConnectionsByTypeName(String name);	
 	
