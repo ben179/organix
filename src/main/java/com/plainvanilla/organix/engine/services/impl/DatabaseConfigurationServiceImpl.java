@@ -1,8 +1,6 @@
 package com.plainvanilla.organix.engine.services.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,7 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 	private ObjectTypeDAO objectTypeDao;
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public void addObjectType(Integer id, String name) {
+	public ObjectType addObjectType(Integer id, String name) {
 		
 		if (objectTypeDao.containsObjectTypeId(id)) {
 			throw new OrganixIllegalConfigurationException("Object type with id : " + id + " already exists in database");
@@ -35,10 +33,12 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 		objectType.setTypeNumber(id);
 
 		objectTypeDao.saveOrUpdate(objectType);
+		
+		return objectType;
 	}
 
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public void addConnectionType(Integer id, String sourceRole,
+	public ConnectionType addConnectionType(Integer id, String sourceRole,
 			Integer sourceNodeId, boolean sourceUnique, boolean sourceMandatory,
 			String targetRole, Integer targetId, boolean targetUnique,
 			boolean targetMandatory) {
@@ -51,52 +51,38 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 
 		connectionTypeDao.saveOrUpdate(type);
 		
+		return type;
+		
 	}
 	
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public ObjectType getObjectType(Integer id) {
 		return objectTypeDao.findByTypeId(id);
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<ObjectType> getObjectTypeByName(String name) {
 		return objectTypeDao.findByName(name);
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public ConnectionType getConnectionType(Integer id) {
 		return connectionTypeDao.findByTypeId(id);
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<ConnectionType> getConnectionTypeByName(String name) {
 		return connectionTypeDao.findByName(name.toLowerCase());
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)	
-	public Map<Integer, ConnectionType> getConnectionTypes() {
-		
-		List<ConnectionType> types = connectionTypeDao.findAll();		
-		Map<Integer, ConnectionType> typeMap = new HashMap<Integer, ConnectionType>();
-		
-		for (ConnectionType type : types) {
-			typeMap.put(type.getTypeNumber(), type);
-		}
-		
-		return typeMap;
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)	
+	public List<ConnectionType> getConnectionTypes() {
+		return connectionTypeDao.findAll();		
 	}
 	
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
-	public Map<Integer, ObjectType> getObjectTypes() {
-		
-		List<ObjectType> types = objectTypeDao.findAll();		
-		Map<Integer, ObjectType> typeMap = new HashMap<Integer, ObjectType>();
-		
-		for (ObjectType type : types) {
-			typeMap.put(type.getTypeNumber(), type);
-		}
-		
-		return typeMap;
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public List<ObjectType> getObjectTypes() {
+		return objectTypeDao.findAll();		
 	}
 	
 	@Autowired

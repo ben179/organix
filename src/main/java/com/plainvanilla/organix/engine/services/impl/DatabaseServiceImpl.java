@@ -90,33 +90,33 @@ public class DatabaseServiceImpl implements DatabaseService {
 		objectInstanceDao.makeTransient(instance);
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<ObjectInstance> findObjectsByTypeId(Integer typeId) {
 		return objectInstanceDao.getObjectInstanceByTypeId(typeId);
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<ObjectInstance> findObjectsByTypeName(String name) {
 		return objectInstanceDao.getObjectInstanceByTypeName(name.toLowerCase());
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<Connection> findConnectionsByTypeId(Integer typeId) {
 		return connectionDao.getConnectionByTypeId(typeId);
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<Connection> findConnectionsByTypeName(String name) {
 		return connectionDao.getConnectionByTypeName(name.toLowerCase());
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<ObjectInstance> findObjectsByTypeIdAndName(Integer typeId,
 			String name) {
 		return objectInstanceDao.getObjectInstanceByTypeIdAndName(typeId, name.toLowerCase());
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<ObjectInstance> findObjectsByName(String name) {
 		return objectInstanceDao.getObjectInstanceByName(name.toLowerCase());
 	}
