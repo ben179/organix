@@ -24,7 +24,9 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
 	public ObjectType addObjectType(Integer id, String name) {
 		
-		if (objectTypeDao.containsObjectTypeId(id)) {
+		if (id == null) {
+			id = objectTypeDao.autodetectFreeTypeId();
+		} else if (objectTypeDao.containsObjectTypeId(id)) {
 			throw new OrganixIllegalConfigurationException("Object type with id : " + id + " already exists in database");
 		}
 		
@@ -43,7 +45,9 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 			String targetRole, Integer targetId, boolean targetUnique,
 			boolean targetMandatory) {
 		
-		if (connectionTypeDao.containsConnectionTypeId(id)) {
+		if (id == null) {
+			id = connectionTypeDao.autodetectFreeTypeId();
+		} else if (connectionTypeDao.containsConnectionTypeId(id)) {
 			throw new OrganixIllegalConfigurationException("Connection type with id : " + id + " already exists in database");
 		}
 		

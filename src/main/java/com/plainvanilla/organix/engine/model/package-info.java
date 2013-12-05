@@ -6,6 +6,16 @@
  */
 
 @org.hibernate.annotations.NamedQueries({
+
+	@org.hibernate.annotations.NamedQuery(		
+			name = "findMaxObjectTypeId",
+			query = "select max(c.typeNumber) from ObjectType c"			
+			),	
+	
+	@org.hibernate.annotations.NamedQuery(		
+			name = "findMaxConnectionTypeId",
+			query = "select max(c.typeNumber) from ConnectionType c"			
+			),
 	
 	@org.hibernate.annotations.NamedQuery(		
 			name = "findConnectionByTypeId",

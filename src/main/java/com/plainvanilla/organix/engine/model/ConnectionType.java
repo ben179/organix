@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.plainvanilla.organix.engine.model.exception.OrganixModelException;
 
@@ -26,6 +27,7 @@ public final class ConnectionType {
 	@Column(name="TYPE_ID", nullable=false, unique=true)
 	private Integer typeNumber;
 	
+	@NotNull(message="Source EndPoint must be set.")
 	@Embedded
 	@AttributeOverrides({
 		@AttributeOverride(name = "roleName", column = @Column(name = "SOURCE_ROLE_NAME")),
@@ -34,6 +36,7 @@ public final class ConnectionType {
 		@AttributeOverride(name = "objectType", column = @Column(name = "SOURCE_TYPE")) })
 	private ConnectionEndpoint sourceEnd;
 	
+	@NotNull(message="Target EndPoint must be set.")
 	@Embedded
 	@AttributeOverrides({
 		@AttributeOverride(name = "roleName", column = @Column(name = "TARGET_ROLE_NAME")),

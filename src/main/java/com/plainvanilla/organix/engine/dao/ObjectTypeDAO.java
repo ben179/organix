@@ -10,4 +10,5 @@ public interface ObjectTypeDAO extends GenericDAO<ObjectType, Long>{
 	ObjectType findByTypeId(Integer objectId);
 	List<ObjectType> findByName(String name);
 	
+	Integer autodetectFreeTypeId();
 }

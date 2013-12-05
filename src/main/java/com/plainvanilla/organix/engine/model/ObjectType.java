@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name="OBJECT_TYPE")
 public class ObjectType {
@@ -19,6 +21,7 @@ public class ObjectType {
 	@Column(name="TYPE_ID", nullable=false, unique=true)
 	private Integer typeNumber;
 		
+	@NotBlank(message="Object Type name must be supplied.")
 	@Column(name="TYPE_NAME", nullable=false)
 	private String name;
 

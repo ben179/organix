@@ -47,5 +47,16 @@ public class HibernateConnectionTypeDAO extends AbstractHibernateDAO<ConnectionT
 		q.setParameter("role", "%" + name + "%");
 		return q.list();
 	}
+
+	public Integer autodetectFreeTypeId() {
+		Query q = super.getCurrentSession().getNamedQuery("findMaxConnectionTypeId");
+		Integer maxTypeId = (Integer)q.uniqueResult();
+		
+		if (maxTypeId == null) {
+			maxTypeId = 0;
+		}
+		
+		return ++maxTypeId;
+	}
 	
 }

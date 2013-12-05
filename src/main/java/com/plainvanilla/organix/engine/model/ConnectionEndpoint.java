@@ -2,19 +2,24 @@ package com.plainvanilla.organix.engine.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Embeddable
 public class ConnectionEndpoint {
 	
 	@Column(name="MANDATORY", nullable=false)
-	private Boolean mandatory;
-	
+	private Boolean mandatory = Boolean.FALSE;
+
 	@Column(name="UNIQUE")
-	private Boolean unique;
+	private Boolean unique = Boolean.FALSE;
 	
+	@NotNull(message="Endpoint Object type must be set.")
 	@Column(name="OBJECT_TYPE")
 	private Integer objectType;
 	
+	@NotBlank(message="Endpoint role name must be set.")
 	@Column(name="ROLE_NAME")
 	private String roleName;
 

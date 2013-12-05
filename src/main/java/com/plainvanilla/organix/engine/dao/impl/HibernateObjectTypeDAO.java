@@ -2,6 +2,7 @@ package com.plainvanilla.organix.engine.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,6 +47,17 @@ public class HibernateObjectTypeDAO extends AbstractHibernateDAO<ObjectType, Lon
 		type.setName(name);
 			
 		return super.findByExample(type);
+	}
+
+	public Integer autodetectFreeTypeId() {
+		Query q = super.getCurrentSession().getNamedQuery("findMaxObjectTypeId");
+		Integer maxTypeId = (Integer)q.uniqueResult();
+		
+		if (maxTypeId == null) {
+			maxTypeId = 0;
+		}
+		
+		return ++maxTypeId;
 	}
 
 }
