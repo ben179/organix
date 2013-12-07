@@ -60,4 +60,9 @@ public class HibernateObjectTypeDAO extends AbstractHibernateDAO<ObjectType, Lon
 		return ++maxTypeId;
 	}
 
+	public int removeAllObjectTypes() {
+		Query q = super.getCurrentSession().getNamedQuery("removeAllObjectTypes");
+		return q.executeUpdate();		
+	}
+
 }

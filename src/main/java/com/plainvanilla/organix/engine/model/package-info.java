@@ -8,6 +8,16 @@
 @org.hibernate.annotations.NamedQueries({
 
 	@org.hibernate.annotations.NamedQuery(		
+			name = "removeAllObjectTypes",
+			query = "delete from ObjectType"			
+			),
+
+	@org.hibernate.annotations.NamedQuery(
+			name = "removeAllConnectionTypes", 
+			query = "delete from ConnectionType"
+			),
+			
+	@org.hibernate.annotations.NamedQuery(		
 			name = "findMaxObjectTypeId",
 			query = "select max(c.typeNumber) from ObjectType c"			
 			),	

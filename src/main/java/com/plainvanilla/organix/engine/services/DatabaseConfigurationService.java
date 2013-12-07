@@ -2,6 +2,7 @@ package com.plainvanilla.organix.engine.services;
 
 import java.util.List;
 
+import com.plainvanilla.organix.engine.model.Configuration;
 import com.plainvanilla.organix.engine.model.ConnectionType;
 import com.plainvanilla.organix.engine.model.ObjectType;
 
@@ -16,7 +17,7 @@ public interface DatabaseConfigurationService {
 	ConnectionType getConnectionType(Integer id);
 	List<ConnectionType> getConnectionTypeByName(String name);
 	
-	List<ConnectionType> getConnectionTypes();
-	List<ObjectType> getObjectTypes();
+	Configuration exportConfiguration();
+	Configuration importConfiguration(Configuration configuration);
 		
 }

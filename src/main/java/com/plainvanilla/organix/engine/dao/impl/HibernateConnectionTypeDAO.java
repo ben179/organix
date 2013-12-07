@@ -58,5 +58,10 @@ public class HibernateConnectionTypeDAO extends AbstractHibernateDAO<ConnectionT
 		
 		return ++maxTypeId;
 	}
+
+	public int removeAllConnectionTypes() {
+		Query q = super.getCurrentSession().createQuery("removeAllConnectionTypes");
+		return q.executeUpdate();
+	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.plainvanilla.organix.engine.dao.ConnectionTypeDAO;
 import com.plainvanilla.organix.engine.dao.ObjectTypeDAO;
+import com.plainvanilla.organix.engine.model.Configuration;
 import com.plainvanilla.organix.engine.model.ConnectionType;
 import com.plainvanilla.organix.engine.model.ObjectType;
 import com.plainvanilla.organix.engine.model.exception.OrganixIllegalConfigurationException;
@@ -89,6 +90,30 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 		return objectTypeDao.findAll();		
 	}
 	
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public Configuration exportConfiguration() {
+		return new Configuration(objectTypeDao.findAll(), connectionTypeDao.findAll());
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+	public Configuration importConfiguration(Configuration configuration) {
+		
+		connectionTypeDao.removeAllConnectionTypes();
+		objectTypeDao.removeAllObjectTypes();
+		
+		for (ObjectType type : configuration.getObjectTypes()) {
+			type.setId(null);
+			objectTypeDao.saveOrUpdate(type);
+		}
+		
+		for (ConnectionType type : configuration.getConnectionTypes()) {
+			type.setId(null);
+			connectionTypeDao.saveOrUpdate(type);
+		}
+		
+		return new Configuration(objectTypeDao.findAll(), connectionTypeDao.findAll());
+	}
+	
 	@Autowired
 	public void setConnectionTypeDao(ConnectionTypeDAO connectionTypeDao) {
 		this.connectionTypeDao = connectionTypeDao;
@@ -98,7 +123,6 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 	public void setObjectTypeDao(ObjectTypeDAO objectTypeDao) {
 		this.objectTypeDao = objectTypeDao;
 	}
-	
-	
 
+	
 }

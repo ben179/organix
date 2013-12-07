@@ -11,4 +11,5 @@ public interface ConnectionTypeDAO extends GenericDAO<ConnectionType, Long> {
 	List<ConnectionType> findByName(String name);
 
 	Integer autodetectFreeTypeId();
+	int removeAllConnectionTypes();
 }

@@ -133,6 +133,11 @@ public final class ConnectionType {
 		return id;
 	}
 
+		
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public ConnectionEndpoint getSourceEnd() {
 		return sourceEnd;
 	}
