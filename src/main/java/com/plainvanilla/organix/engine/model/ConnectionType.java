@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -23,6 +25,10 @@ public final class ConnectionType {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="ID")
 	private Long id;
+	
+	@ManyToOne(optional=false)
+	@JoinColumn(name="CONFIGURATION_ID", nullable=false)
+	private Configuration configuration;
 	
 	@Column(name="TYPE_ID", nullable=false, unique=true)
 	private Integer typeNumber;
@@ -45,7 +51,7 @@ public final class ConnectionType {
 		@AttributeOverride(name = "objectType", column = @Column(name = "TARGET_TYPE")) })
 	private ConnectionEndpoint targetEnd;
 	
-	public static ConnectionType createInstance(int typeId, String srcRoleName, int sourceType, boolean sourceUnique, boolean sourceMandatory, String targRoleName, int targetType, boolean targetUnique, boolean targetMandatory) {
+	static ConnectionType createType(int typeId, String srcRoleName, int sourceType, boolean sourceUnique, boolean sourceMandatory, String targRoleName, int targetType, boolean targetUnique, boolean targetMandatory) {
 		
 		ConnectionEndpoint sep = new ConnectionEndpoint(srcRoleName, sourceMandatory, sourceUnique, sourceType);
 		ConnectionEndpoint tep = new ConnectionEndpoint(targRoleName, targetMandatory, targetUnique, targetType);
@@ -58,7 +64,7 @@ public final class ConnectionType {
 		return ct;
 	}
 	
-	public Connection createConnection(ObjectInstance sourceObject, ObjectInstance targetObject) {
+	public Connection createInstance(ObjectInstance sourceObject, ObjectInstance targetObject) {
 		
 		if (!sourceEnd.getObjectType().equals(sourceObject.getType().getTypeNumber())) {
 			throw new OrganixModelException("Connection source end type does not match. Excpected type: " + sourceEnd.getObjectType() + ". Found type: " + sourceObject.getType().getTypeNumber());
@@ -94,33 +100,6 @@ public final class ConnectionType {
 		return false;
 	}
 
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((typeNumber == null) ? 0 : typeNumber.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ConnectionType other = (ConnectionType) obj;
-		if (typeNumber == null) {
-			if (other.typeNumber != null)
-				return false;
-		} else if (!typeNumber.equals(other.typeNumber))
-			return false;
-		return true;
-	}
-
 	public Integer getTypeNumber() {
 		return typeNumber;
 	}
@@ -153,9 +132,80 @@ public final class ConnectionType {
 	public void setTargetEnd(ConnectionEndpoint targetEnd) {
 		this.targetEnd = targetEnd;
 	}
+	
+	
+	void setConfiguration(Configuration configuration) {
+		this.configuration = configuration;
+	}
+
+	public Configuration getConfiguration() {
+		return configuration;
+	}
+	
+	public String getSrcRoleName() {
+		return getSourceEnd().getRoleName();
+	}
+
+	public Boolean getSrcMandatory() {
+		return getSourceEnd().getMandatory();
+	}
+
+	public Boolean getSrcUnique() {
+		return getSourceEnd().getUnique();
+	}
+
+	public Integer getSrcObjType() {
+		return getSourceEnd().getObjectType();
+	}
+	
+	
+	public String getTrgRoleName() {
+		return getTargetEnd().getRoleName();
+	}
+	
+	public Boolean getTrgMandatory() {
+		return getTargetEnd().getMandatory();
+	}
+
+	public Boolean getTrgUnique() {
+		return getTargetEnd().getUnique();
+	}
+
+	public Integer getTrgObjType() {
+		return getTargetEnd().getObjectType();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((configuration == null) ? 0 : configuration.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ConnectionType other = (ConnectionType) obj;
+		if (configuration == null) {
+			if (other.configuration != null)
+				return false;
+		} else if (!configuration.equals(other.configuration))
+			return false;
+		if (typeNumber == null) {
+			if (other.typeNumber != null)
+				return false;
+		} else if (!typeNumber.equals(other.typeNumber))
+			return false;
+		return true;
+	}
 
 	
 	
-
-
 }

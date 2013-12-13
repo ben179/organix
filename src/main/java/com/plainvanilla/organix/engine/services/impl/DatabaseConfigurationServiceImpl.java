@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.plainvanilla.organix.engine.dao.ConfigurationDAO;
 import com.plainvanilla.organix.engine.dao.ConnectionTypeDAO;
 import com.plainvanilla.organix.engine.dao.ObjectTypeDAO;
 import com.plainvanilla.organix.engine.model.Configuration;
@@ -21,6 +22,7 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 	
 	private ConnectionTypeDAO connectionTypeDao;
 	private ObjectTypeDAO objectTypeDao;
+	private ConfigurationDAO configurationDao;
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
 	public ObjectType addObjectType(Integer id, String name) {
@@ -52,7 +54,7 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 			throw new OrganixIllegalConfigurationException("Connection type with id : " + id + " already exists in database");
 		}
 		
-		ConnectionType type = ConnectionType.createInstance(id, sourceRole, sourceNodeId, sourceUnique, sourceMandatory, targetRole, targetId, targetUnique, targetMandatory);
+		ConnectionType type = ConnectionType.createType(id, sourceRole, sourceNodeId, sourceUnique, sourceMandatory, targetRole, targetId, targetUnique, targetMandatory);
 
 		connectionTypeDao.saveOrUpdate(type);
 		
@@ -91,8 +93,8 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
-	public Configuration exportConfiguration() {
-		return new Configuration(objectTypeDao.findAll(), connectionTypeDao.findAll());
+	public Configuration exportConfiguration(String name, Integer version) {
+		return configurationDao.getByNameAndVersion(name, version);
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
@@ -124,5 +126,9 @@ public class DatabaseConfigurationServiceImpl implements DatabaseConfigurationSe
 		this.objectTypeDao = objectTypeDao;
 	}
 
+	@Autowired
+	public void setConfigurationDao(ConfigurationDAO configurationDao) {
+		this.configurationDao = configurationDao;
+	}
 	
 }

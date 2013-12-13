@@ -63,7 +63,7 @@ public class DatabaseServiceImpl implements DatabaseService {
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
 	public Connection addConnection(ConnectionType type, ObjectInstance source,
 			ObjectInstance target) {
-		Connection connection = type.createConnection(source, target);
+		Connection connection = type.createInstance(source, target);
 		return connectionDao.makePersistent(connection);
 	}
 	

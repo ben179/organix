@@ -8,6 +8,16 @@
 @org.hibernate.annotations.NamedQueries({
 
 	@org.hibernate.annotations.NamedQuery(		
+			name = "findConfigurationByName",
+			query = "from Configuration c where c.name = :name"			
+			),
+			
+	@org.hibernate.annotations.NamedQuery(		
+			name = "findConfigurationByNameAndVersion",
+			query = "from Configuration c where c.name = :name and c.version = :version"			
+			),
+	
+	@org.hibernate.annotations.NamedQuery(		
 			name = "removeAllObjectTypes",
 			query = "delete from ObjectType"			
 			),

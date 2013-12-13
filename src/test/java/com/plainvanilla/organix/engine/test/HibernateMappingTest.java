@@ -81,16 +81,16 @@ public class HibernateMappingTest {
 		session.save(operationCluster);
 		session.save(productCluster);
 				
-		ConnectionType itProduct_ProductCluster = ConnectionType.createInstance(220, "Belongs to Product Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", productCluster.getTypeNumber(), false, false);
-		ConnectionType itProduct_OperationCluster = ConnectionType.createInstance(221, "Belongs to Operation Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", operationCluster.getTypeNumber(), false, false);
-		ConnectionType itProduct_PDTeam = ConnectionType.createInstance(222, "Belongs to PD Team", itSystem.getTypeNumber(), true, false, "Contains IT-Product", pdTeam.getTypeNumber(), false, false);
-		ConnectionType pcManager_ProductCluster = ConnectionType.createInstance(223, "Manages Product Cluster", person.getTypeNumber(), false, false, "Is Managed By", productCluster.getTypeNumber(), true, true);		
-		ConnectionType pcManagerDeputy_ProductCluster = ConnectionType.createInstance(224, "Is PCMD", person.getTypeNumber(), false, false, "Has PCDM", productCluster.getTypeNumber(), false, false);		
-		ConnectionType ocManager_OperationCluster = ConnectionType.createInstance(225, "Manages Operation Cluster", person.getTypeNumber(), false, false, "Is Managed By", operationCluster.getTypeNumber(), true, true);		
-		ConnectionType ocManagerDeputy_OperationCluster = ConnectionType.createInstance(226, "Is OCMD", person.getTypeNumber(), false, false, "Has OCDM", operationCluster.getTypeNumber(), false, false);		
-		ConnectionType pdtManager_PDTeam = ConnectionType.createInstance(227, "Manages PD Team", person.getTypeNumber(), false, false, "Is Managed By", pdTeam.getTypeNumber(), true, true);		
-		ConnectionType pdtManagerDeputy_PDTeam = ConnectionType.createInstance(228, "Is PDMD", person.getTypeNumber(), false, false, "Has PDMD", pdTeam.getTypeNumber(), false, false);		
-		ConnectionType businessCoordinator_itProduct = ConnectionType.createInstance(229, "Has Business Coordinator", itSystem.getTypeNumber(), true, true, "Is Business Coordinator of", person.getTypeNumber(), false, false);
+		ConnectionType itProduct_ProductCluster = ConnectionType.createType(220, "Belongs to Product Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", productCluster.getTypeNumber(), false, false);
+		ConnectionType itProduct_OperationCluster = ConnectionType.createType(221, "Belongs to Operation Cluster", itSystem.getTypeNumber(), true, false, "Contains IT-Product", operationCluster.getTypeNumber(), false, false);
+		ConnectionType itProduct_PDTeam = ConnectionType.createType(222, "Belongs to PD Team", itSystem.getTypeNumber(), true, false, "Contains IT-Product", pdTeam.getTypeNumber(), false, false);
+		ConnectionType pcManager_ProductCluster = ConnectionType.createType(223, "Manages Product Cluster", person.getTypeNumber(), false, false, "Is Managed By", productCluster.getTypeNumber(), true, true);		
+		ConnectionType pcManagerDeputy_ProductCluster = ConnectionType.createType(224, "Is PCMD", person.getTypeNumber(), false, false, "Has PCDM", productCluster.getTypeNumber(), false, false);		
+		ConnectionType ocManager_OperationCluster = ConnectionType.createType(225, "Manages Operation Cluster", person.getTypeNumber(), false, false, "Is Managed By", operationCluster.getTypeNumber(), true, true);		
+		ConnectionType ocManagerDeputy_OperationCluster = ConnectionType.createType(226, "Is OCMD", person.getTypeNumber(), false, false, "Has OCDM", operationCluster.getTypeNumber(), false, false);		
+		ConnectionType pdtManager_PDTeam = ConnectionType.createType(227, "Manages PD Team", person.getTypeNumber(), false, false, "Is Managed By", pdTeam.getTypeNumber(), true, true);		
+		ConnectionType pdtManagerDeputy_PDTeam = ConnectionType.createType(228, "Is PDMD", person.getTypeNumber(), false, false, "Has PDMD", pdTeam.getTypeNumber(), false, false);		
+		ConnectionType businessCoordinator_itProduct = ConnectionType.createType(229, "Has Business Coordinator", itSystem.getTypeNumber(), true, true, "Is Business Coordinator of", person.getTypeNumber(), false, false);
 		
 		session.save(itProduct_ProductCluster);
 		session.save(itProduct_OperationCluster);
@@ -155,48 +155,48 @@ public class HibernateMappingTest {
 		session.save(operationCluster2);
 		session.save(operationCluster3);
 		
-		Connection connection1 = itProduct_ProductCluster.createConnection(itSystem1, productCluster1);
-		Connection connection2 = itProduct_ProductCluster.createConnection(itSystem2, productCluster1);
-		Connection connection3 = itProduct_ProductCluster.createConnection(itSystem3, productCluster1);
-		Connection connection4 = itProduct_ProductCluster.createConnection(itSystem4, productCluster2);
-		Connection connection5 = itProduct_ProductCluster.createConnection(itSystem5, productCluster3);
+		Connection connection1 = itProduct_ProductCluster.createInstance(itSystem1, productCluster1);
+		Connection connection2 = itProduct_ProductCluster.createInstance(itSystem2, productCluster1);
+		Connection connection3 = itProduct_ProductCluster.createInstance(itSystem3, productCluster1);
+		Connection connection4 = itProduct_ProductCluster.createInstance(itSystem4, productCluster2);
+		Connection connection5 = itProduct_ProductCluster.createInstance(itSystem5, productCluster3);
 
-		Connection connection6 = itProduct_OperationCluster.createConnection(itSystem1, operationCluster3);
-		Connection connection7 = itProduct_OperationCluster.createConnection(itSystem2, operationCluster2);
-		Connection connection8 = itProduct_OperationCluster.createConnection(itSystem3, operationCluster1);
-		Connection connection9 = itProduct_OperationCluster.createConnection(itSystem4, operationCluster3);
-		Connection connection10 = itProduct_OperationCluster.createConnection(itSystem5, operationCluster1);
+		Connection connection6 = itProduct_OperationCluster.createInstance(itSystem1, operationCluster3);
+		Connection connection7 = itProduct_OperationCluster.createInstance(itSystem2, operationCluster2);
+		Connection connection8 = itProduct_OperationCluster.createInstance(itSystem3, operationCluster1);
+		Connection connection9 = itProduct_OperationCluster.createInstance(itSystem4, operationCluster3);
+		Connection connection10 = itProduct_OperationCluster.createInstance(itSystem5, operationCluster1);
 
-		Connection connection11 = itProduct_PDTeam.createConnection(itSystem1, pdTeam1);
-		Connection connection12 = itProduct_PDTeam.createConnection(itSystem2, pdTeam3);
-		Connection connection13 = itProduct_PDTeam.createConnection(itSystem3, pdTeam2);
-		Connection connection14 = itProduct_PDTeam.createConnection(itSystem4, pdTeam3);
-		Connection connection15 = itProduct_PDTeam.createConnection(itSystem5, pdTeam1);
+		Connection connection11 = itProduct_PDTeam.createInstance(itSystem1, pdTeam1);
+		Connection connection12 = itProduct_PDTeam.createInstance(itSystem2, pdTeam3);
+		Connection connection13 = itProduct_PDTeam.createInstance(itSystem3, pdTeam2);
+		Connection connection14 = itProduct_PDTeam.createInstance(itSystem4, pdTeam3);
+		Connection connection15 = itProduct_PDTeam.createInstance(itSystem5, pdTeam1);
 		
-		Connection connection16 = pdtManager_PDTeam.createConnection(person1, pdTeam1);
-		Connection connection17 = pdtManager_PDTeam.createConnection(person2, pdTeam2);
-		Connection connection18 = pdtManager_PDTeam.createConnection(person3, pdTeam3);
+		Connection connection16 = pdtManager_PDTeam.createInstance(person1, pdTeam1);
+		Connection connection17 = pdtManager_PDTeam.createInstance(person2, pdTeam2);
+		Connection connection18 = pdtManager_PDTeam.createInstance(person3, pdTeam3);
 		
-		Connection connection19 = pcManager_ProductCluster.createConnection(person2, productCluster1);
-		Connection connection20 = pcManager_ProductCluster.createConnection(person1, productCluster2);
-		Connection connection21 = pcManager_ProductCluster.createConnection(person1, productCluster3);
+		Connection connection19 = pcManager_ProductCluster.createInstance(person2, productCluster1);
+		Connection connection20 = pcManager_ProductCluster.createInstance(person1, productCluster2);
+		Connection connection21 = pcManager_ProductCluster.createInstance(person1, productCluster3);
 
-		Connection connection22 = ocManager_OperationCluster.createConnection(person2, operationCluster1);
-		Connection connection23 = ocManager_OperationCluster.createConnection(person3, operationCluster2);
-		Connection connection24 = ocManager_OperationCluster.createConnection(person4, operationCluster3);
+		Connection connection22 = ocManager_OperationCluster.createInstance(person2, operationCluster1);
+		Connection connection23 = ocManager_OperationCluster.createInstance(person3, operationCluster2);
+		Connection connection24 = ocManager_OperationCluster.createInstance(person4, operationCluster3);
 		
-		Connection connection25 = businessCoordinator_itProduct.createConnection(itSystem1, person4);
-		Connection connection26 = businessCoordinator_itProduct.createConnection(itSystem2, person2);
-		Connection connection27 = businessCoordinator_itProduct.createConnection(itSystem3, person2);
-		Connection connection28 = businessCoordinator_itProduct.createConnection(itSystem4, person1);
-		Connection connection29 = businessCoordinator_itProduct.createConnection(itSystem5, person4);
+		Connection connection25 = businessCoordinator_itProduct.createInstance(itSystem1, person4);
+		Connection connection26 = businessCoordinator_itProduct.createInstance(itSystem2, person2);
+		Connection connection27 = businessCoordinator_itProduct.createInstance(itSystem3, person2);
+		Connection connection28 = businessCoordinator_itProduct.createInstance(itSystem4, person1);
+		Connection connection29 = businessCoordinator_itProduct.createInstance(itSystem5, person4);
 		
-		Connection connection30 = pdtManagerDeputy_PDTeam.createConnection(person5, pdTeam1);
-		Connection connection31 = pdtManagerDeputy_PDTeam.createConnection(person4, pdTeam1);
-		Connection connection32 = pcManagerDeputy_ProductCluster.createConnection(person1, productCluster1);
-		Connection connection33 = pcManagerDeputy_ProductCluster.createConnection(person2, productCluster1);		
-		Connection connection34 = ocManagerDeputy_OperationCluster.createConnection(person3, operationCluster3);
-		Connection connection35 = ocManagerDeputy_OperationCluster.createConnection(person4, operationCluster3);
+		Connection connection30 = pdtManagerDeputy_PDTeam.createInstance(person5, pdTeam1);
+		Connection connection31 = pdtManagerDeputy_PDTeam.createInstance(person4, pdTeam1);
+		Connection connection32 = pcManagerDeputy_ProductCluster.createInstance(person1, productCluster1);
+		Connection connection33 = pcManagerDeputy_ProductCluster.createInstance(person2, productCluster1);		
+		Connection connection34 = ocManagerDeputy_OperationCluster.createInstance(person3, operationCluster3);
+		Connection connection35 = ocManagerDeputy_OperationCluster.createInstance(person4, operationCluster3);
 		
 		session.save(connection1);
 		session.save(connection2);

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -17,6 +19,10 @@ public class ObjectType {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="ID")
 	private Long id;
+	
+	@ManyToOne(optional=false)
+	@JoinColumn(name="CONFIGURATION_ID", nullable=false)
+	private Configuration configuration;	
 	
 	@Column(name="TYPE_ID", nullable=false, unique=true)
 	private Integer typeNumber;
@@ -48,11 +54,21 @@ public class ObjectType {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Configuration getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(Configuration configuration) {
+		this.configuration = configuration;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((configuration == null) ? 0 : configuration.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -66,13 +82,25 @@ public class ObjectType {
 		if (getClass() != obj.getClass())
 			return false;
 		ObjectType other = (ObjectType) obj;
+		if (configuration == null) {
+			if (other.configuration != null)
+				return false;
+		} else if (!configuration.equals(other.configuration))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (typeNumber == null) {
+			if (other.typeNumber != null)
+				return false;
+		} else if (!typeNumber.equals(other.typeNumber))
+			return false;
 		return true;
 	}
+
+
 	
 	
 }
