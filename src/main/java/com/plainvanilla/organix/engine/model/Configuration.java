@@ -15,6 +15,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import com.plainvanilla.organix.engine.model.exception.OrganixIllegalConfigurationException;
 import com.plainvanilla.organix.engine.model.exception.OrganixModelException;
 
 
@@ -30,6 +35,10 @@ public final class Configuration {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="CONFIG_DATE")
 	private Date configurationDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="UPDATE_DATE")
+	private Date lastUpdateDate;
 	
 	@Column(name="NAME", unique=true, nullable=false)
 	private String name;
@@ -38,19 +47,48 @@ public final class Configuration {
 	private Integer version;
 	
 	@OneToMany(mappedBy="configuration")
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private Set<ConnectionType> connectionTypes = new HashSet<ConnectionType>();
 	
 	@OneToMany(mappedBy="configuration")
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private Set<ObjectType> objectTypes = new HashSet<ObjectType>();
+	
+	@OneToMany(mappedBy="configuration")	
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	private Set<Database> databases = new HashSet<Database>();
 	
 	public Long getId() {
 		return id;
 	}
+
+	public Configuration() {
+	}
 	
 	public Configuration(Set<ObjectType> objectTypes, Set<ConnectionType> connectionTypes) {
-		this.connectionTypes = connectionTypes;
-		this.objectTypes = objectTypes;
-		this.configurationDate = new Date();
+		setTypes(objectTypes, connectionTypes);
+	}
+	
+	public void setTypes(Set<ObjectType> objectTypes, Set<ConnectionType> connectionTypes) {
+		
+		clearAllTypes();
+		
+		for (ObjectType objectType : objectTypes) {
+			addObjectType(objectType);
+		}
+		
+		for (ConnectionType connectionType : connectionTypes) {
+			addConnectionType(connectionType);
+		}
+		
+		this.lastUpdateDate = new Date();
+	}
+	
+	public void clearAllTypes() {
+		this.connectionTypes.clear();
+		this.objectTypes.clear();
+		
+		this.lastUpdateDate = new Date();
 	}
 	
 	public ConnectionType addConnectionType(ConnectionType t) {
@@ -60,10 +98,6 @@ public final class Configuration {
 	public ConnectionType addConnectionType(int typeId, String srcRoleName, int sourceType, boolean sourceUnique, boolean sourceMandatory, String targRoleName, int targetType, boolean targetUnique, boolean targetMandatory) {
 		
 		ConnectionType type = ConnectionType.createType(typeId, srcRoleName, sourceType, sourceUnique, sourceMandatory, targRoleName, targetType, targetUnique, targetMandatory);
-	
-		if (connectionTypes.contains(type)) {
-			throw new OrganixModelException("Connection type with Id " + type.getTypeNumber() + " already exists in Configuration " + this.getId());
-		}
 		
 		if (!containsObjectType(sourceType)) {
 			throw new OrganixModelException("Object type with Id " + type.getTypeNumber() + " does not exist in Configuration " + this.getId());			
@@ -75,6 +109,8 @@ public final class Configuration {
 		
 		type.setConfiguration(this);
 		connectionTypes.add(type);
+		
+		this.lastUpdateDate = new Date();
 		
 		return type;
 	}
@@ -90,15 +126,66 @@ public final class Configuration {
 		type.setName(name);
 		type.setConfiguration(this);
 		
-		if (objectTypes.contains(type)) {
-			throw new OrganixModelException("Object type with Id " + type.getTypeNumber() + " already exists in Configuration " + this.getId());
-		}
-		
 		objectTypes.add(type);
+		
+		this.lastUpdateDate = new Date();
 		
 		return type;
 	}
 	
+	
+
+	public Set<Database> getDatabases() {
+		return Collections.unmodifiableSet(databases);
+	}
+
+
+	public Database createDatabase(String name) {
+		
+		Database d = new Database();
+		
+		d.setConfiguration(this);
+		d.setName(name);
+		
+		if (databases.contains(d)) {
+			throw new OrganixModelException("Database " + d + " already exists for configuration " + this);
+		}
+		
+		databases.add(d);
+		
+		return d;
+	}
+
+	public void removeDatabase(Database d) {
+		d.cleanDatabase();
+		d.setConfiguration(null);
+		databases.remove(d);
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+	
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+		
+	public void setConfigurationDate(Date configurationDate) {
+		this.configurationDate = configurationDate;
+	}
+
 	public Set<ConnectionType> getConnectionTypes() {
 		return Collections.unmodifiableSet(connectionTypes);
 	}
@@ -110,6 +197,15 @@ public final class Configuration {
 	public Date getConfigurationDate() {
 		return configurationDate;
 	}
+	
+	public boolean containsConnectionType(ConnectionType type) {
+		return connectionTypes.contains(type);
+	}
+
+	public boolean containsObjectType(ObjectType type) {
+		return objectTypes.contains(type);
+	}
+	
 	
 	private boolean containsObjectType(Integer typeNumber) {
 		for (ObjectType type : objectTypes) {
@@ -153,6 +249,8 @@ public final class Configuration {
 		return true;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "Configuration [name=" + name + ", version=" + version + "]";
+	}
 }

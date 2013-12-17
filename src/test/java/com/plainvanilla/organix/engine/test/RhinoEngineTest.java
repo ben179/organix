@@ -1,11 +1,12 @@
 package com.plainvanilla.organix.engine.test;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ImporterTopLevel;
 import org.mozilla.javascript.Scriptable;
 
-
+@Ignore
 public class RhinoEngineTest {
 
 	@Test

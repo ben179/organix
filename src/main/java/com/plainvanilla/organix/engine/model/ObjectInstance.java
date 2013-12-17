@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-
 @Entity
 @Table(name="OBJECT_INSTANCE")
 public class ObjectInstance {
@@ -38,6 +36,9 @@ public class ObjectInstance {
 	@OneToMany(mappedBy="targetObject")	
 	protected List<Connection> outgoingConnections = new ArrayList<Connection>();
 
+	@ManyToOne
+	@JoinColumn(name="DATABASE_ID", nullable=false)
+	private Database database;
 	
 	public ObjectInstance() {
 		
@@ -91,8 +92,19 @@ public class ObjectInstance {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
-	
-	
+	}
 
+	public Database getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(Database database) {
+		this.database = database;
+	}
+
+	@Override
+	public String toString() {
+		return "ObjectInstance [name=" + name + ", type=" + type + "]";
+	}
+		
 }

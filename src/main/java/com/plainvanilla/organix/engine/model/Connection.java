@@ -30,6 +30,10 @@ public final class Connection {
 	@JoinColumn(name="TYPE_ID", nullable=false)
 	private ConnectionType type;
 
+	@ManyToOne
+	@JoinColumn(name="DATABASE_ID", nullable=false)
+	private Database database;
+		
 	private Connection() {
 		
 	}
@@ -60,7 +64,19 @@ public final class Connection {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public Database getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(Database database) {
+		this.database = database;
+	}
 	
-	
-	
+	@Override
+	public String toString() {
+		return "Connection [sourceObject=" + sourceObject + ", targetObject="
+				+ targetObject + ", type=" + type + "]";
+	}
+		
 }

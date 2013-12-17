@@ -24,7 +24,7 @@ public class ObjectType {
 	@JoinColumn(name="CONFIGURATION_ID", nullable=false)
 	private Configuration configuration;	
 	
-	@Column(name="TYPE_ID", nullable=false, unique=true)
+	@Column(name="TYPE_ID", nullable=false, unique=false)
 	private Integer typeNumber;
 		
 	@NotBlank(message="Object Type name must be supplied.")
@@ -100,7 +100,9 @@ public class ObjectType {
 		return true;
 	}
 
-
-	
+	@Override
+	public String toString() {
+		return "ObjectType [typeNumber=" + typeNumber + ", name=" + name + "]";
+	}
 	
 }

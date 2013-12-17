@@ -24,4 +24,6 @@ public interface TestConstants {
 	int BELONGS_TO_PD_TEAM_CTYPE = 222;
 	int BELONGS_TO_OPERATION_CLUSTER_CTYPE = 221;
 	int BELONGS_TO_PRODUCT_CLUSTER_CTYPE = 220;
+
+	String CONFIG_NAME = "testConfig1";
 }

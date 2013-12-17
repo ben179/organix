@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import com.plainvanilla.organix.engine.model.ConnectionType;
 import com.plainvanilla.organix.engine.model.ObjectInstance;
 import com.plainvanilla.organix.engine.model.ObjectType;
 
+@Ignore
 public class HibernateMappingTest {
 
 	final Logger logger = LoggerFactory.getLogger(HibernateMappingTest.class);

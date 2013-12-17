@@ -30,7 +30,7 @@ public final class ConnectionType {
 	@JoinColumn(name="CONFIGURATION_ID", nullable=false)
 	private Configuration configuration;
 	
-	@Column(name="TYPE_ID", nullable=false, unique=true)
+	@Column(name="TYPE_ID", nullable=false, unique=false)
 	private Integer typeNumber;
 	
 	@NotNull(message="Source EndPoint must be set.")
@@ -51,7 +51,7 @@ public final class ConnectionType {
 		@AttributeOverride(name = "objectType", column = @Column(name = "TARGET_TYPE")) })
 	private ConnectionEndpoint targetEnd;
 	
-	static ConnectionType createType(int typeId, String srcRoleName, int sourceType, boolean sourceUnique, boolean sourceMandatory, String targRoleName, int targetType, boolean targetUnique, boolean targetMandatory) {
+	public static ConnectionType createType(int typeId, String srcRoleName, int sourceType, boolean sourceUnique, boolean sourceMandatory, String targRoleName, int targetType, boolean targetUnique, boolean targetMandatory) {
 		
 		ConnectionEndpoint sep = new ConnectionEndpoint(srcRoleName, sourceMandatory, sourceUnique, sourceType);
 		ConnectionEndpoint tep = new ConnectionEndpoint(targRoleName, targetMandatory, targetUnique, targetType);
@@ -206,6 +206,10 @@ public final class ConnectionType {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "ConnectionType [typeNumber=" + typeNumber + ", sourceEnd="
+				+ sourceEnd.getRoleName() + ", targetEnd=" + targetEnd.getRoleName() + "]";
+	}
 	
 }

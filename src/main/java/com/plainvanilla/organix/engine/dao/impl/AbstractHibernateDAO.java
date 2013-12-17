@@ -16,13 +16,13 @@ import org.springframework.stereotype.Repository;
 import com.plainvanilla.organix.engine.dao.GenericDAO;
 
 @Repository
+@SuppressWarnings("unchecked")
 public abstract class AbstractHibernateDAO<T, ID extends Serializable> implements GenericDAO<T, ID> {
 	
 	private Class<T> persistentClass;
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	@SuppressWarnings("unchecked")
 	public AbstractHibernateDAO(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		this.persistentClass = (Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
@@ -37,7 +37,7 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
 		return persistentClass;
 	}
 	
-	@SuppressWarnings("unchecked")	
+	
 	public T findById(ID id, boolean lock) {
 		T entity;
 		
@@ -50,13 +50,11 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
 		return entity;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		Criteria c = getCurrentSession().createCriteria(getPersistentClass());
 		return c.list();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<T> findByExample(T exampleInstance, String... excludeProperty) {
 		Example example = Example.create(exampleInstance).ignoreCase().enableLike(MatchMode.ANYWHERE);
 		
@@ -68,7 +66,6 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
 		
 	}
 	
-	@SuppressWarnings("unchecked")
 	public T makePersistent(T entity) {
 		return (T)getCurrentSession().merge(entity);
 	}
