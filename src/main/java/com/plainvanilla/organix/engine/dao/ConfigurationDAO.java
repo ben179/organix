@@ -15,10 +15,12 @@ public interface ConfigurationDAO extends GenericDAO<Configuration, Long> {
 	boolean containsConnectionTypeId(Integer objectId, Long configId);
 	ConnectionType getConnectionTypeByTypeId(Integer objectId, Long configId);
 	List<ConnectionType> getConnectionTypeByName(String name, Long configId);
+	List<ConnectionType> getAllConnectionTypes(Long configId);
 	
 	boolean containsObjectTypeId(Integer objectId, Long configId);
 	ObjectType getObjectTypeByTypeId(Integer objectId, Long configId);
 	List<ObjectType> getObjectTypeByName(String name, Long configId);
+	List<ObjectType> getAllObjectTypes(Long configId);
 	
 	Integer autodetectObjectTypeId(Long configId);
 	Integer autodetectConnectionTypeId(Long configId);

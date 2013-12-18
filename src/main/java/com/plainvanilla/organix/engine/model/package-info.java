@@ -16,7 +16,17 @@
 			name = "removeConnectionInstance",
 			query = "delete from Connection i where i.id = :id and i.database.id = :dbId"			
 			),			
-			
+	
+	@org.hibernate.annotations.NamedQuery(
+			name = "findObjectTypes",
+			query = "from ObjectType t where t.configuration.id = :configId"			
+			),
+
+	@org.hibernate.annotations.NamedQuery(
+			name = "findConnectionTypes",
+			query = "from ConnectionType t where t.configuration.id = :configId"			
+			),
+					
 	@org.hibernate.annotations.NamedQuery(
 			name = "findObjectTypeByTypeId",
 			query = "from ObjectType t where t.typeNumber = :typeId and t.configuration.id = :configId"			

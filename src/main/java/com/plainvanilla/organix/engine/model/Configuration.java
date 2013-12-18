@@ -15,11 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import com.plainvanilla.organix.engine.model.exception.OrganixIllegalConfigurationException;
 import com.plainvanilla.organix.engine.model.exception.OrganixModelException;
 
 
@@ -45,7 +43,7 @@ public final class Configuration {
 	
 	@Column(name="VERSION", nullable=false)
 	private Integer version;
-	
+
 	@OneToMany(mappedBy="configuration")
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private Set<ConnectionType> connectionTypes = new HashSet<ConnectionType>();

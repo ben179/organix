@@ -123,6 +123,18 @@ public class HibernateConfigurationDAO extends AbstractHibernateDAO<Configuratio
 		
 		return ++maxTypeId;	
 	}
+
+	public List<ConnectionType> getAllConnectionTypes(Long configId) {
+		Query q = super.getCurrentSession().getNamedQuery("findConnectionTypes");
+		q.setParameter("configId", configId);
+		return q.list();
+	}
+
+	public List<ObjectType> getAllObjectTypes(Long configId) {
+		Query q = super.getCurrentSession().getNamedQuery("findObjectTypes");
+		q.setParameter("configId", configId);
+		return q.list();
+	}
 	
 
 }

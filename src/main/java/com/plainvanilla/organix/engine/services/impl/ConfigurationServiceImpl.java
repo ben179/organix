@@ -14,7 +14,6 @@ import com.plainvanilla.organix.engine.model.ConnectionType;
 import com.plainvanilla.organix.engine.model.Database;
 import com.plainvanilla.organix.engine.model.ObjectType;
 import com.plainvanilla.organix.engine.model.exception.OrganixIllegalConfigurationException;
-import com.plainvanilla.organix.engine.model.exception.OrganixModelException;
 import com.plainvanilla.organix.engine.services.ConfigurationService;
 
 
@@ -61,19 +60,19 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 			boolean targetMandatory, Long configId) {
 
 		Configuration config = configurationDao.findById(configId, true);
-		ConnectionType type = ConnectionType.createType(id, sourceRole, sourceNodeId, sourceUnique, sourceMandatory, targetRole, targetId, targetUnique, targetMandatory);
-
+		
+		Integer newTypeId = null;
+		
 		if (id == null) {		
-			final Integer newTypeId = configurationDao.autodetectConnectionTypeId(configId);
-			type.setTypeNumber(newTypeId);		
+			newTypeId = configurationDao.autodetectConnectionTypeId(configId);
 		} else {
-			
 			if (configurationDao.containsConnectionTypeId(id, config.getId())) {
 				throw new OrganixIllegalConfigurationException("Connection type with Id " + id + " already exists in Configuration " + config);
 			}
-			
-			type.setTypeNumber(id);			
+			newTypeId = id;
 		}		
+		
+		ConnectionType type = ConnectionType.createType(newTypeId, sourceRole, sourceNodeId, sourceUnique, sourceMandatory, targetRole, targetId, targetUnique, targetMandatory);
 		
 		config.addConnectionType(type);
 		configurationDao.saveOrUpdate(config);
@@ -145,5 +144,20 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		configurationDao.saveOrUpdate(config);
 		
 		return db;
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public List<ObjectType> getAllObjectTypes(Long configId) {
+		return configurationDao.getAllObjectTypes(configId);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public List<ConnectionType> getAllConnectionTypes(Long configId) {
+		return configurationDao.getAllConnectionTypes(configId);
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public Configuration getConfiguration(Long configId) {
+		return configurationDao.findById(configId, false);
 	}
 }
