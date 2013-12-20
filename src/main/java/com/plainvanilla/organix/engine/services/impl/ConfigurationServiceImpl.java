@@ -158,6 +158,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public Configuration getConfiguration(Long configId) {
-		return configurationDao.findById(configId, false);
+		Configuration config = configurationDao.findById(configId, false);
+		return config;
 	}
 }

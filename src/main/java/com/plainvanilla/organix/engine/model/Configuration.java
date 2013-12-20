@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,15 +45,15 @@ public final class Configuration {
 	@Column(name="VERSION", nullable=false)
 	private Integer version;
 
-	@OneToMany(mappedBy="configuration")
+	@OneToMany(mappedBy="configuration", fetch = FetchType.EAGER)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private Set<ConnectionType> connectionTypes = new HashSet<ConnectionType>();
 	
-	@OneToMany(mappedBy="configuration")
+	@OneToMany(mappedBy="configuration", fetch = FetchType.EAGER)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private Set<ObjectType> objectTypes = new HashSet<ObjectType>();
 	
-	@OneToMany(mappedBy="configuration")	
+	@OneToMany(mappedBy="configuration", fetch = FetchType.EAGER)	
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private Set<Database> databases = new HashSet<Database>();
 	
