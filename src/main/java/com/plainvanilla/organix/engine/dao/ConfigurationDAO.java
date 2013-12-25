@@ -11,6 +11,7 @@ public interface ConfigurationDAO extends GenericDAO<Configuration, Long> {
 	Configuration getByNameAndVersion(String name, Integer version);
 	List<Configuration> getByName(String name);
 	Boolean configurationExists(String name, Integer version);
+	List<Configuration> getAllConfigurations(boolean headers);
 
 	boolean containsConnectionTypeId(Integer objectId, Long configId);
 	ConnectionType getConnectionTypeByTypeId(Integer objectId, Long configId);

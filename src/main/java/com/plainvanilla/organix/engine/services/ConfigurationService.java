@@ -25,5 +25,6 @@ public interface ConfigurationService {
 	Configuration getConfiguration(String configName, Integer configVersion);
 	Configuration getConfiguration(Long configId);
 	Configuration importConfiguration(Configuration configuration);
+	List<Configuration> getAllConfigurations(boolean headersOnly);
 
 }

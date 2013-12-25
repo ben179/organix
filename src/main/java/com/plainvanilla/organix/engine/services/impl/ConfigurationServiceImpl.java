@@ -161,4 +161,10 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		Configuration config = configurationDao.findById(configId, false);
 		return config;
 	}
+
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public List<Configuration> getAllConfigurations(boolean headersOnly) {
+		List<Configuration> headers = configurationDao.getAllConfigurations(headersOnly);
+		return headers;
+	}
 }

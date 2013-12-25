@@ -2,6 +2,8 @@ package com.plainvanilla.organix.engine.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,6 +136,19 @@ public class HibernateConfigurationDAO extends AbstractHibernateDAO<Configuratio
 		Query q = super.getCurrentSession().getNamedQuery("findObjectTypes");
 		q.setParameter("configId", configId);
 		return q.list();
+	}
+
+	public List<Configuration> getAllConfigurations(boolean headers) {
+		
+		Criteria c = super.getCurrentSession().createCriteria(Configuration.class);
+		
+		if (headers) {
+			c.setFetchMode("connectionTypes", FetchMode.SELECT);
+			c.setFetchMode("objectTypes", FetchMode.SELECT);
+			c.setFetchMode("databases", FetchMode.SELECT);		
+		}
+		
+		return c.list();
 	}
 	
 
