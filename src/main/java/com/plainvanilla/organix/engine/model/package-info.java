@@ -31,6 +31,11 @@
 			name = "findObjectTypeByTypeId",
 			query = "from ObjectType t where t.typeNumber = :typeId and t.configuration.id = :configId"			
 			),
+
+	@org.hibernate.annotations.NamedQuery(
+			name = "findObjectTypeByIdAndConfig",
+			query = "from ObjectType t where t.id = :objId and t.configuration.id = :configId"			
+			),	
 	
 	@org.hibernate.annotations.NamedQuery(
 			name = "findConnectionTypeByTypeId",
@@ -110,3 +115,4 @@
 
 
 package com.plainvanilla.organix.engine.model;
+import org.hibernate.Query;

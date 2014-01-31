@@ -19,7 +19,8 @@ public interface ConfigurationDAO extends GenericDAO<Configuration, Long> {
 	List<ConnectionType> getAllConnectionTypes(Long configId);
 	
 	boolean containsObjectTypeId(Integer objectId, Long configId);
-	ObjectType getObjectTypeByTypeId(Integer objectId, Long configId);
+	ObjectType getObjectTypeByTypeId(Integer typeId, Long configId);
+	ObjectType getObjectTypeByTypeId(Long objectId, Long configId);
 	List<ObjectType> getObjectTypeByName(String name, Long configId);
 	List<ObjectType> getAllObjectTypes(Long configId);
 	

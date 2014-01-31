@@ -10,9 +10,11 @@ import com.plainvanilla.organix.engine.model.ObjectType;
 public interface ConfigurationService {
 	
 	ObjectType addObjectType(Integer id, String name, Long configId);
+	ObjectType updateObjectType(ObjectType newVersion);
+	boolean deleteObjectType(ObjectType type);
 	ConnectionType addConnectionType(Integer id, String sourceRole, Integer sourceNodeId, boolean sourceUnique, boolean sourceMandatory, String targetRole, Integer targetId, boolean targetUnique, boolean targetMandatory, Long configId);
 	
-	ObjectType getObjectType(Integer id, Long configId);
+	ObjectType getObjectType(Long objId, Long configId);
 	List<ObjectType> getAllObjectTypes(Long configId);
 	List<ObjectType> getObjectTypeByName(String name, Long configId);
 	

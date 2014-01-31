@@ -71,8 +71,17 @@ public class HibernateConfigurationDAO extends AbstractHibernateDAO<Configuratio
 
 	public ObjectType getObjectTypeByTypeId(Integer typeId, Long configId) {
 		
-		Query q = super.getCurrentSession().getNamedQuery("findObjectTypeByTypeId");
+		Query q = super.getCurrentSession().getNamedQuery("findObjectTypeById");
 		q.setParameter("typeId", typeId);
+		q.setParameter("configId", configId);
+
+		return (ObjectType)q.uniqueResult();
+	}
+	
+	public ObjectType getObjectTypeByTypeId(Long objId, Long configId) {
+		
+		Query q = super.getCurrentSession().getNamedQuery("findObjectTypeByIdAndConfig");
+		q.setParameter("objId", objId);
 		q.setParameter("configId", configId);
 
 		return (ObjectType)q.uniqueResult();

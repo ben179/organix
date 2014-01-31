@@ -21,7 +21,7 @@ public class ObjectType {
 	private Long id;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name="CONFIGURATION_ID", nullable=false)
+	@JoinColumn(name="CONFIGURATION_ID", referencedColumnName="ID", nullable=false)
 	private Configuration configuration;	
 	
 	@Column(name="TYPE_ID", nullable=false, unique=false)
@@ -63,6 +63,10 @@ public class ObjectType {
 		this.configuration = configuration;
 	}
 
+	public void copyFrom(ObjectType other) {
+		this.name = other.name;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

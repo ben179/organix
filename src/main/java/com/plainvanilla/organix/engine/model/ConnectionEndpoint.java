@@ -9,6 +9,10 @@ import org.hibernate.validator.constraints.NotBlank;
 @Embeddable
 public class ConnectionEndpoint {
 	
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 	@Column(name="MANDATORY", nullable=false)
 	private Boolean mandatory = Boolean.FALSE;
 

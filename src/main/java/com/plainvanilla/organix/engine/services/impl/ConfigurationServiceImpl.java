@@ -47,12 +47,40 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 			objectType.setTypeNumber(id);			
 		}
 
-		config.addObjectType(objectType);
+		objectType = config.addObjectType(objectType);
 		configurationDao.saveOrUpdate(config);
 		
 		return objectType;
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+	public ObjectType updateObjectType(ObjectType newVersion) {
+
+		ObjectType type = configurationDao.getObjectTypeByTypeId(newVersion.getId(), newVersion.getConfiguration().getId());
+		
+		if (type == null) {
+			return null;
+		}
+		
+		type.copyFrom(newVersion);
+		
+		configurationDao.saveOrUpdate(type.getConfiguration());
+		
+		return type;
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+	public boolean deleteObjectType(ObjectType type) {
+		
+		ObjectType t = configurationDao.getObjectTypeByTypeId(type.getId(), type.getConfiguration().getId());
+		
+		if (t == null) {
+			return false;
+		}
+		return false;
+	}
+
+	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
 	public ConnectionType addConnectionType(Integer id, String sourceRole,
 			Integer sourceNodeId, boolean sourceUnique, boolean sourceMandatory,
@@ -82,8 +110,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
-	public ObjectType getObjectType(Integer typeId, Long configId) {
-		return configurationDao.getObjectTypeByTypeId(typeId, configId);
+	public ObjectType getObjectType(Long objId, Long configId) {
+		return configurationDao.getObjectTypeByTypeId(objId, configId);
 	}
 
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
@@ -167,4 +195,6 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		List<Configuration> headers = configurationDao.getAllConfigurations(headersOnly);
 		return headers;
 	}
+
+
 }

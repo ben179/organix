@@ -46,11 +46,11 @@ public final class Configuration {
 	private Integer version;
 
 	@OneToMany(mappedBy="configuration", fetch = FetchType.EAGER)
-	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	@Cascade({CascadeType.ALL})
 	private Set<ConnectionType> connectionTypes = new HashSet<ConnectionType>();
 	
 	@OneToMany(mappedBy="configuration", fetch = FetchType.EAGER)
-	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	@Cascade({CascadeType.ALL})
 	private Set<ObjectType> objectTypes = new HashSet<ObjectType>();
 	
 	@OneToMany(mappedBy="configuration", fetch = FetchType.EAGER)	
@@ -197,6 +197,12 @@ public final class Configuration {
 		return configurationDate;
 	}
 	
+	
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public boolean containsConnectionType(ConnectionType type) {
 		return connectionTypes.contains(type);
 	}
@@ -252,4 +258,5 @@ public final class Configuration {
 	public String toString() {
 		return "Configuration [name=" + name + ", version=" + version + "]";
 	}
+	
 }
