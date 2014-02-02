@@ -22,7 +22,7 @@ import com.plainvanilla.organix.engine.model.exception.OrganixModelException;
 
 @Entity
 @Table(name="ORGANIX_DB")
-public class Database {
+public class Database implements OrganixEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)

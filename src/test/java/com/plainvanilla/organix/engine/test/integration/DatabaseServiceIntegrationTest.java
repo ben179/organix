@@ -3,6 +3,7 @@ package com.plainvanilla.organix.engine.test.integration;
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.BELONGS_TO_OPERATION_CLUSTER_CTYPE;
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.BELONGS_TO_PD_TEAM_CTYPE;
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.BELONGS_TO_PRODUCT_CLUSTER_CTYPE;
+import static com.plainvanilla.organix.engine.test.integration.TestConstants.CONFIG_NAME;
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.HAS_BUSINESS_COORDINATOR_CTYPE;
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.IS_OCMD_CTYPE;
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.IS_PCMD_CTYPE;
@@ -16,12 +17,12 @@ import static com.plainvanilla.organix.engine.test.integration.TestConstants.PC_
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.PD_TEAM_TYPE_ID;
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.PERSON;
 import static com.plainvanilla.organix.engine.test.integration.TestConstants.PERSON_TYPE_ID;
-import static com.plainvanilla.organix.engine.test.integration.TestConstants.CONFIG_NAME;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ import com.plainvanilla.organix.engine.model.ObjectInstance;
 import com.plainvanilla.organix.engine.services.ConfigurationService;
 import com.plainvanilla.organix.engine.services.DatabaseService;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-config-test.xml")
 @TransactionConfiguration(defaultRollback=false)
@@ -55,6 +57,7 @@ public class DatabaseServiceIntegrationTest {
 		assertNotNull(service);
 	}
 	
+	@Ignore
 	@Test
 	@Transactional
 	public void testCreateDatabase() {

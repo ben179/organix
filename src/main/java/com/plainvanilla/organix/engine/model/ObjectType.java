@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="OBJECT_TYPE")
-public class ObjectType {
+public class ObjectType implements OrganixEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)

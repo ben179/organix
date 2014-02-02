@@ -19,7 +19,7 @@ import com.plainvanilla.organix.engine.model.exception.OrganixModelException;
 
 @Entity
 @Table(name="CONNECTION_TYPE")
-public final class ConnectionType {
+public class ConnectionType implements OrganixEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)

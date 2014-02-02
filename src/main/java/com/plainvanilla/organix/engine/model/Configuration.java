@@ -24,7 +24,7 @@ import com.plainvanilla.organix.engine.model.exception.OrganixModelException;
 
 @Entity
 @Table(name="CONFIGURATION")
-public final class Configuration {
+public final class Configuration implements OrganixEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)

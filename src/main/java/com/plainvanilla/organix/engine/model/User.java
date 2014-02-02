@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ORGANIX_DB_USER")
-public class User {
+public class User implements OrganixEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)

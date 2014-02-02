@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Embeddable
-public class ConnectionEndpoint {
+public class ConnectionEndpoint implements OrganixEntity {
 	
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
